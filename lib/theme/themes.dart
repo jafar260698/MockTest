@@ -50,11 +50,6 @@ class AppThemeStyle {
     fontWeight: FontWeight.w500,
   );
 
-  static TextStyle resendCodeStyle = TextStyle(
-    fontSize: 14,
-    color: primaryColor,
-    fontWeight: FontWeight.w600,
-  );
 
   static TextStyle titleFormStyle = TextStyle(
     fontSize: 14,
@@ -98,12 +93,13 @@ class AppThemeStyle {
   static TextStyle subtitleList = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
+    color: Colors.grey,
   );
 
   static TextStyle titleListPrimary = TextStyle(
     fontSize: 14,
     color: Colors.grey,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
   );
 
   static TextStyle title14 = TextStyle(

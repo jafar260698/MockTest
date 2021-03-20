@@ -1,6 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:task/components/avatar_image.dart';
+import 'package:task/components/column_text.dart';
+import 'package:task/components/row_field.dart';
 import 'package:task/model/model.dart';
 import 'package:task/theme/themes.dart';
 
@@ -36,72 +39,26 @@ class _DetailScreen extends State<DetailScreen>{
 
   Widget _mainView(Results results){
     return Padding(
-      padding: EdgeInsets.all(13),
-      child: Row(
+      padding: EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: 150.0,
-            height: 150.0,
-            decoration: new BoxDecoration(
-              color: const Color(0xff7c94b6),
-              image: new DecorationImage(
-                image: new NetworkImage(results.image),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: new BorderRadius.all(new Radius.circular(40.0)),
-              border: new Border.all(
-                color: Colors.white,
-                width: 2.0,
-              ),
-            ),
+          SizedBox(height: 15.0),
+          AvatarImage(imageUrl: results.image,size: 180.0),
+          SizedBox(height: 10.0),
+          RowField(title: "${results.status} - ${results.species}"),
+          ColumnText(
+              headerText:  "Origin location",
+              mainText: results.location.name
           ),
-          SizedBox(width: 10.0),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                results.name,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              SizedBox(height: 30.0),
-              SizedBox(
-                width: 200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 6,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 5,
-                            backgroundColor: Color(0xff00C48C),
-                          ),
-                        ),
-                        SizedBox(width: 8.0),
-                        Opacity(
-                          opacity: 0.5,
-                          child: Text(
-                            results.status,
-                            style: TextStyle(fontSize: 14.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Opacity(
-                      opacity: 0.5,
-                      child: Text(
-                        results.gender,
-                        style: TextStyle(fontSize: 14.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          ColumnText(
+              headerText:  "Gender",
+              mainText: results.gender
           ),
+          ColumnText(
+              headerText:  "Location",
+              mainText: results.location.name
+          )
         ],
       ),
     );

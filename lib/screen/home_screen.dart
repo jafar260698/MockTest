@@ -1,19 +1,20 @@
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task/bloc/all_data_bloc.dart';
+import 'package:task/components/avatar_image.dart';
+import 'package:task/components/row_field.dart';
 import 'package:task/model/model.dart';
 import 'package:task/screen/detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
-
   @override
   _HomeScreen createState() => _HomeScreen();
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  List<Results> _list = [];
 
   @override
   void initState() {
@@ -39,8 +40,7 @@ class _HomeScreen extends State<HomeScreen> {
       stream: allDataBloc.mapStream,
       builder: (context, AsyncSnapshot<Model> snapshot) {
         if (snapshot.hasData) {
-          _list = snapshot.data.results;
-          return getListUI(_list);
+          return getListUI(snapshot.data.results);
         } else if (snapshot.hasError) {
           return Center(child: Text(snapshot.error.toString()));
         }
@@ -73,57 +73,23 @@ class _HomeScreen extends State<HomeScreen> {
                   padding: EdgeInsets.all(13),
                   child: Row(
                     children: [
-                      Container(
-                        width: 80.0,
-                        height: 80.0,
-                        decoration: new BoxDecoration(
-                          color: const Color(0xff7c94b6),
-                          image: new DecorationImage(
-                            image: new NetworkImage(element.image),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: new BorderRadius.all(new Radius.circular(40.0)),
-                          border: new Border.all(
-                            color: Colors.white,
-                            width: 2.0,
-                          ),
-                        ),
-                      ),
+                      AvatarImage(imageUrl: element.image,size: 70,),
                       SizedBox(width: 10.0),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
+                          AutoSizeText(
                             element.name,
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 20.0),
                           SizedBox(
                             width: 200,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 6,
-                                      backgroundColor: Colors.white,
-                                      child: CircleAvatar(
-                                        radius: 5,
-                                        backgroundColor: Color(0xff00C48C),
-                                      ),
-                                    ),
-                                    SizedBox(width: 8.0),
-                                    Opacity(
-                                      opacity: 0.5,
-                                      child: Text(
-                                        element.status,
-                                        style: TextStyle(fontSize: 14.0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                RowField(title:  "${element.status} - ${element.species}"),
                                 Opacity(
                                   opacity: 0.5,
                                   child: Text(
