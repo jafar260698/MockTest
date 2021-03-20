@@ -73,7 +73,10 @@ class _HomeScreen extends State<HomeScreen> {
                   padding: EdgeInsets.all(13),
                   child: Row(
                     children: [
-                      AvatarImage(imageUrl: element.image,size: 70,),
+                      Hero(
+                          tag: element.id,
+                          child: AvatarImage(imageUrl: element.image,size: 70,)
+                      ),
                       SizedBox(width: 10.0),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

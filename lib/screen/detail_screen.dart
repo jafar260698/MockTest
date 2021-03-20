@@ -44,12 +44,16 @@ class _DetailScreen extends State<DetailScreen>{
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 15.0),
-          AvatarImage(imageUrl: results.image,size: 180.0),
-          SizedBox(height: 10.0),
+          Hero(
+              tag: results.id,
+              child: AvatarImage(imageUrl: results.image,size: 180.0)
+          ),
+          SizedBox(height: 15.0),
           RowField(title: "${results.status} - ${results.species}"),
+          SizedBox(height: 25.0),
           ColumnText(
               headerText:  "Origin location",
-              mainText: results.location.name
+              mainText: results.origin.name
           ),
           ColumnText(
               headerText:  "Gender",

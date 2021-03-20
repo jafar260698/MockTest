@@ -19,7 +19,7 @@ class ColumnText extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0,left: 15,right: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
