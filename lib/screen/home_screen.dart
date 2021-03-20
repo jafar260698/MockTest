@@ -25,10 +25,10 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         elevation: 0,
         title: Text("Rick and Morty"),
-        automaticallyImplyLeading: false,
       ),
       body: _mainView(),
     );
@@ -61,7 +61,7 @@ class _HomeScreen extends State<HomeScreen> {
           padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 13.0),
           child: InkWell(
             onTap: (){
-              _navigateToScreen();
+              _navigateToScreen(element);
             },
             child: Card(
               elevation: 4.0,
@@ -69,11 +69,7 @@ class _HomeScreen extends State<HomeScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(13.0),
               ),
-              child: GestureDetector(
-                onTap: () => {
-                  _navigateToScreen(),
-                },
-                child: Padding(
+              child: Padding(
                   padding: EdgeInsets.all(13),
                   child: Row(
                     children: [
@@ -145,16 +141,15 @@ class _HomeScreen extends State<HomeScreen> {
                 ),
               ),
             ),
-          ),
         );
       },
     );
   }
 
-  void _navigateToScreen() {
+  void _navigateToScreen(Results results) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => DetailScreen()),
+      MaterialPageRoute(builder: (context) => DetailScreen(results: results)),
     );
   }
 }
